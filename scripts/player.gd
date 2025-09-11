@@ -31,10 +31,10 @@ func _physics_process(_delta):
 	# This gives us the actual pixels to move this frame
 	# If direction is 1 and speed is 300, we get 300 pixels right
 	# If direction is -1 and speed is 300, we get -300 pixels (left)
-	
+	velocity.x = xSpeed * xDirection
 	
 	# TODO: Calculate Y movement the same way
-	
+	velocity.y = ySpeed * yDirection
 	
 	# TODO: Set the player's velocity (how fast they're moving)
 	# Godot's CharacterBody2D uses a velocity system
