@@ -8,6 +8,8 @@ var facing = "down"
 var ySpeed = 300.0
 var yDirection = 0
 var coins = 0
+var is_attacking = false
+var attack_timer = .67
 @export var offset : Vector2 = Vector2(0, -25)
 
 # TODO: Add health system variables
@@ -18,7 +20,14 @@ func _ready() -> void:
 	pass
 
 func _physics_process(_delta):
-	# TODO: Get horizontal input (left/right keys)
+	if Input.is_action_just_pressed("ui_accept"):
+		is_attacking = true
+		
+	if is_attacking:
+		attack_timer -= _delta
+		if attack_timer < 0:
+			is_attacking = false
+			attack_timer = .67
 	# Input.get_axis checks two keys and gives us a number:
 	# - When LEFT is pressed: returns -1.0
 	# - When RIGHT is pressed: returns 1.0  
@@ -55,6 +64,12 @@ func _physics_process(_delta):
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
 
+func on_body_enter(body):
+	if body.is_in_group("enemy") and is_attacking:
+		print("attacked")
+		
+		
+		
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
 	# TODO: Set the animation based on the facing direction
@@ -85,7 +100,7 @@ func change_coins(_amount:int):
 
 func die():
 	print("you died")
-	
+	get_tree().reload_current_scene()
 # TODO: Create shooting function
 func shoot():
 	# TODO: Create a new projectile instance
