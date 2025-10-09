@@ -10957,7 +10957,7 @@ position = Vector2(-195, 44)
 [node name="MinoTauret5" parent="Enemies" instance=ExtResource("16_oljba")]
 position = Vector2(-639, 465)
 
-[node name="MeleeMinotaurs" type="Node" parent="Enemies"]
+[node name="MeleeMinotaurs" type="Node" parent="Enemies" groups=["enemy"]]
 
 [node name="MeleeMinotaur" parent="Enemies/MeleeMinotaurs" instance=ExtResource("15_dokvp")]
 position = Vector2(219, -24)

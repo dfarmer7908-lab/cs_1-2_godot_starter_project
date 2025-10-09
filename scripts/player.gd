@@ -11,7 +11,9 @@ var coins = 0
 var is_attacking = false
 var attack_timer = .67
 @export var offset : Vector2 = Vector2(0, -25)
+@onready var melee_box: CollisionShape2D = $Melee/Melee_Box
 
+var current_enemy
 # TODO: Add health system variables
 var maxHealth = 10
 var health = maxHealth
@@ -47,12 +49,16 @@ func _physics_process(_delta):
 	# TODO: Update facing direction based on movement
 	if xDirection > 0:
 		facing = "right"
+		melee_box.position = Vector2(15,-15)
 	elif xDirection < 0:
 		facing = "left"
+		melee_box.position = Vector2(-15,-15)
 	elif yDirection < 0:
 		facing = "up"
+		melee_box.position = Vector2(0,-45)
 	elif yDirection > 0:
 		facing = "down"
+		melee_box.position = Vector2(0,5)
 	
 	if Input.is_action_just_pressed("ui_select"):
 		shoot()
@@ -64,9 +70,7 @@ func _physics_process(_delta):
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
 
-func on_body_enter(body):
-	if body.is_in_group("enemy") and is_attacking:
-		print("attacked")
+
 		
 		
 		
@@ -116,3 +120,18 @@ func shoot():
 	get_tree().get_root().add_child(projectile_clone)
 
 	pass
+
+
+func _on_melee_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		current_enemy = body
+		body.change_health=2
+	pass # Replace with function body.
+
+func _on_melee_body_exited(body: Node2D) -> void:
+	current_enemy = null
+	pass # Replace with function body.
+
+func _process(delta: float) -> void:
+	if current_enemy !=null and is_attacking:
+		current_enemy.queue_free()

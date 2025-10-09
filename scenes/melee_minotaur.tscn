@@ -1,6 +1,7 @@
-[gd_scene load_steps=129 format=3 uid="uid://ddq1bkyn8j1by"]
+[gd_scene load_steps=130 format=3 uid="uid://ddq1bkyn8j1by"]
 
 [ext_resource type="Texture2D" uid="uid://busa5myjbwb4i" path="res://sprites/Download38899.png" id="1_nohjn"]
+[ext_resource type="Script" uid="uid://di404qslpnp8m" path="res://scenes/melee_minotaur.gd" id="1_vltjp"]
 [ext_resource type="Texture2D" uid="uid://dqoamfql4kdnq" path="res://sprites/Download19204.png" id="2_7o3s3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgyv5"]
@@ -1001,7 +1002,8 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xl86w"]
 
-[node name="MeleeMinotaur" type="CharacterBody2D"]
+[node name="MeleeMinotaur" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_vltjp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xx5td")
@@ -1014,4 +1016,3 @@ frame_progress = 0.985295
 position = Vector2(0, 9.5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_xl86w")
-disabled = true
