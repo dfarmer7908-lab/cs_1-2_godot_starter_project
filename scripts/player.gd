@@ -125,7 +125,7 @@ func shoot():
 func _on_melee_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		current_enemy = body
-		body.change_health=2
+		
 	pass # Replace with function body.
 
 func _on_melee_body_exited(body: Node2D) -> void:
