@@ -129,9 +129,11 @@ func _on_melee_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 
 func _on_melee_body_exited(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		current_enemy = body
 	current_enemy = null
 	pass # Replace with function body.
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if current_enemy !=null and is_attacking:
-		current_enemy.queue_free()
+		current_enemy.change_health(-2)
