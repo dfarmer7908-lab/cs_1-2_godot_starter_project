@@ -10,10 +10,11 @@ var yDirection = 0
 var coins = 0
 var is_attacking = false
 var attack_timer = .67
+var current_enemy = null
 @export var offset : Vector2 = Vector2(0, -25)
 @onready var melee_box: CollisionShape2D = $Melee/Melee_Box
 
-var current_enemy
+
 # TODO: Add health system variables
 var maxHealth = 10
 var health = maxHealth
@@ -24,7 +25,6 @@ func _ready() -> void:
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		is_attacking = true
-		
 	if is_attacking:
 		attack_timer -= _delta
 		if attack_timer < 0:
@@ -70,25 +70,21 @@ func _physics_process(_delta):
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
 
-
-		
-		
 		
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
 	# TODO: Set the animation based on the facing direction
-	if velocity.is_zero_approx():
-		_animation_player.play("idle_" + facing)
+	if is_attacking:
+		_animation_player.play("attack_" + facing)
+	else:
+		if velocity.is_zero_approx():
+			_animation_player.play("idle_" + facing)
 	# This combines "idle_" with whatever direction we're facing
-		pass
-	elif !velocity.is_zero_approx():
+		elif !velocity.is_zero_approx():
 		#walking animation here
-		_animation_player.play("walk_" + facing)
-		pass
+			_animation_player.play("walk_" + facing)
 		
 	
-
-
 # TODO: Create health change function for interactions
 func change_health(_amount:int):
 		health += _amount
@@ -126,14 +122,15 @@ func _on_melee_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		current_enemy = body
 		
-	pass # Replace with function body.
 
 func _on_melee_body_exited(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		current_enemy = body
-	current_enemy = null
-	pass # Replace with function body.
+		current_enemy = null
+		
+	
 
 func _process(_delta: float) -> void:
 	if current_enemy !=null and is_attacking:
-		current_enemy.change_health(-2)
+		current_enemy.change_health(-1)
+		
+		

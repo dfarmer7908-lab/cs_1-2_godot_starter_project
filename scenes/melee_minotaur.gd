@@ -1,17 +1,24 @@
 extends CharacterBody2D
 
-var start_timer = 2
-var timer = start_timer
 var maxHealth = 10
 var health = maxHealth
+var starttime = .67
+var timer = starttime
 
+func _process(delta: float):
+	timer -= delta
+	
 func change_health(_amount:int):
-		health += _amount
+		if timer <0:
+			health += _amount
+			timer = starttime
+		
 		if health < 1:
 			die()
 		if health > maxHealth:
 			health = maxHealth
-		print("Health: ", health)
+		print("minotaur health: ", health)
 		
 func die():
+	queue_free()
 	print("minotaur died")
