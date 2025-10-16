@@ -23,9 +23,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		player = body
 		in_range = true
+	
 	pass # Replace with function body.
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
+	in_range = false
 	pass # Replace with function body.
 func shoot(target):
 	var projectile_clone = projectile_original.instantiate()

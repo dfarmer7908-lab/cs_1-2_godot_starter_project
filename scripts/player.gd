@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @onready var _animation_player: AnimatedSprite2D = $AnimatedSprite2D
+
 var projectile_original = preload("res://scenes/projectile.tscn")
 
 var xSpeed = 300.0
@@ -66,25 +67,19 @@ func _physics_process(_delta):
 	# call the animation function
 	update_animation()
 	
-	
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
 
-		
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
-	# TODO: Set the animation based on the facing direction
 	if is_attacking:
 		_animation_player.play("attack_" + facing)
 	else:
 		if velocity.is_zero_approx():
 			_animation_player.play("idle_" + facing)
-	# This combines "idle_" with whatever direction we're facing
 		elif !velocity.is_zero_approx():
-		#walking animation here
 			_animation_player.play("walk_" + facing)
 		
-	
 # TODO: Create health change function for interactions
 func change_health(_amount:int):
 		health += _amount
@@ -122,15 +117,11 @@ func _on_melee_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		current_enemy = body
 		
-
 func _on_melee_body_exited(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		current_enemy = null
 		
-	
-
 func _process(_delta: float) -> void:
 	if current_enemy !=null and is_attacking:
 		current_enemy.change_health(-1)
-		
-		
+	
