@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://def2efafh1llv"]
+[gd_scene load_steps=64 format=4 uid="uid://def2efafh1llv"]
 
 [ext_resource type="Texture2D" uid="uid://dy23vpinyhffc" path="res://sprites/Tiles/MainLev2.0.png" id="2_dhsyk"]
 [ext_resource type="Texture2D" uid="uid://dmimlbfdo7m8s" path="res://sprites/Tiles/RW_MarshLand_entrance.png" id="3_yh0u4"]
@@ -11,7 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://clxiycjhkoytl" path="res://sprites/Download34266.png" id="8_ejm08"]
 [ext_resource type="PackedScene" uid="uid://bmjwvyc35hdqh" path="res://scenes/key.tscn" id="9_t8tki"]
 [ext_resource type="PackedScene" uid="uid://c7ppmxv7gcxjl" path="res://scenes/coin.tscn" id="9_wjn7r"]
+[ext_resource type="Script" uid="uid://c8l46vk6qb6nk" path="res://scripts/lever2.gd" id="10_0ld40"]
 [ext_resource type="Texture2D" uid="uid://dsnljdmimsonc" path="res://sprites/items/chest.png" id="10_rpv53"]
+[ext_resource type="Script" uid="uid://cyqtrxtkow8kp" path="res://scripts/lever3.gd" id="11_gqmmt"]
+[ext_resource type="Script" uid="uid://tx72ilfg0r4v" path="res://scripts/lever4.gd" id="12_yc10j"]
 [ext_resource type="PackedScene" uid="uid://dpdol3rld7bec" path="res://scenes/locked_chest.tscn" id="13_8t6ui"]
 [ext_resource type="Texture2D" uid="uid://bhxhn8cbpsqwy" path="res://sprites/items/cart.png" id="14_53jwk"]
 [ext_resource type="PackedScene" uid="uid://ddq1bkyn8j1by" path="res://scenes/melee_minotaur.tscn" id="15_dokvp"]
@@ -10829,17 +10832,20 @@ position = Vector2(-364, -107)
 [node name="Key2" parent="Items" instance=ExtResource("9_t8tki")]
 position = Vector2(701, 88)
 
-[node name="Lever" parent="Items" instance=ExtResource("8_17j5i")]
+[node name="Lever1" parent="Items" instance=ExtResource("8_17j5i")]
 position = Vector2(-289, 527)
 
 [node name="Lever2" parent="Items" instance=ExtResource("8_17j5i")]
 position = Vector2(-240, 527)
+script = ExtResource("10_0ld40")
 
 [node name="Lever3" parent="Items" instance=ExtResource("8_17j5i")]
 position = Vector2(-192, 527)
+script = ExtResource("11_gqmmt")
 
 [node name="Lever4" parent="Items" instance=ExtResource("8_17j5i")]
 position = Vector2(-538, 125)
+script = ExtResource("12_yc10j")
 
 [node name="Coins" type="Node" parent="Items"]
 

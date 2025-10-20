@@ -12,6 +12,10 @@ var coins = 0
 var is_attacking = false
 var attack_timer = .67
 var current_enemy = null
+var lever1 = false
+var lever2 = false
+var lever3 = false
+var heal = false
 @export var offset : Vector2 = Vector2(0, -25)
 @onready var melee_box: CollisionShape2D = $Melee/Melee_Box
 
@@ -71,6 +75,12 @@ func _physics_process(_delta):
 	move_and_slide()
 
 # TODO: Create animation function (add this outside of _physics_process)
+
+	if lever1 and !lever2 and lever3:
+		heal = true
+		print("Secret! Heal 3 health!")
+		
+
 func update_animation():
 	if is_attacking:
 		_animation_player.play("attack_" + facing)
@@ -87,6 +97,8 @@ func change_health(_amount:int):
 			die()
 		if health > maxHealth:
 			health = maxHealth
+		if heal:
+			health += 3
 		print("Health: ", health)
 
 func change_coins(_amount:int):
@@ -96,6 +108,7 @@ func change_coins(_amount:int):
 func die():
 	print("you died")
 	get_tree().reload_current_scene()
+	
 # TODO: Create shooting function
 func shoot():
 	# TODO: Create a new projectile instance
@@ -124,4 +137,7 @@ func _on_melee_body_exited(body: Node2D) -> void:
 func _process(_delta: float) -> void:
 	if current_enemy !=null and is_attacking:
 		current_enemy.change_health(-1)
-	
+	pass
+
+
+ 
