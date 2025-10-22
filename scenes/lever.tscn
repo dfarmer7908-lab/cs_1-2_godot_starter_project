@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dbwgynl4w3noc" path="res://scripts/lever1.gd" id="1_ncfea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kcve"]
-size = Vector2(61, 40.5)
+size = Vector2(76, 40.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qxmkn"]
 atlas = ExtResource("1_iorl1")
@@ -38,7 +38,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ncfea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -21.75)
+position = Vector2(12, -21.75)
 shape = SubResource("RectangleShape2D_1kcve")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

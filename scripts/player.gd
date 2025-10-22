@@ -1,6 +1,5 @@
 extends CharacterBody2D
 @onready var _animation_player: AnimatedSprite2D = $AnimatedSprite2D
-
 var projectile_original = preload("res://scenes/projectile.tscn")
 
 var xSpeed = 300.0
@@ -15,7 +14,8 @@ var current_enemy = null
 var lever1 = false
 var lever2 = false
 var lever3 = false
-var heal = false
+var stopspam = true
+
 @export var offset : Vector2 = Vector2(0, -25)
 @onready var melee_box: CollisionShape2D = $Melee/Melee_Box
 
@@ -37,6 +37,7 @@ func _physics_process(_delta):
 			attack_timer = .67
 	# Input.get_axis checks two keys and gives us a number:
 	# - When LEFT is pressed: returns -1.0
+	
 	# - When RIGHT is pressed: returns 1.0  
 	# - When NOTHING is pressed: returns 0.0
 	xDirection = Input.get_axis("ui_left", "ui_right")
@@ -65,9 +66,10 @@ func _physics_process(_delta):
 		facing = "down"
 		melee_box.position = Vector2(0,5)
 	
+	
 	if Input.is_action_just_pressed("ui_select"):
 		shoot()
-	
+
 	# call the animation function
 	update_animation()
 	
@@ -76,10 +78,10 @@ func _physics_process(_delta):
 
 # TODO: Create animation function (add this outside of _physics_process)
 
-	if lever1 and !lever2 and lever3:
-		heal = true
-		print("Secret! Heal 3 health!")
-		
+	if lever1 and !lever2 and lever3 and stopspam:
+		print("Secret found! 5 health healed!") 
+		change_health(+5)
+		stopspam = false
 
 func update_animation():
 	if is_attacking:
@@ -92,14 +94,12 @@ func update_animation():
 		
 # TODO: Create health change function for interactions
 func change_health(_amount:int):
-		health += _amount
-		if health < 1:
-			die()
-		if health > maxHealth:
-			health = maxHealth
-		if heal:
-			health += 3
-		print("Health: ", health)
+	health += _amount
+	if health < 1:
+		die()
+	if health > maxHealth:
+		health = maxHealth
+	print("Health: ", health)
 
 func change_coins(_amount:int):
 	coins += _amount
