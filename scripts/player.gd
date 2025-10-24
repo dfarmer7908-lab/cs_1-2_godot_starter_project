@@ -16,6 +16,7 @@ var lever2 = false
 var lever3 = false
 var stopspam = true
 
+
 @export var offset : Vector2 = Vector2(0, -25)
 @onready var melee_box: CollisionShape2D = $Melee/Melee_Box
 
@@ -30,6 +31,7 @@ func _ready() -> void:
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		is_attacking = true
+		print ("melee")
 	if is_attacking:
 		attack_timer -= _delta
 		if attack_timer < 0:
@@ -55,10 +57,10 @@ func _physics_process(_delta):
 	# TODO: Update facing direction based on movement
 	if xDirection > 0:
 		facing = "right"
-		melee_box.position = Vector2(15,-15)
+		melee_box.position = Vector2(20,-15)
 	elif xDirection < 0:
 		facing = "left"
-		melee_box.position = Vector2(-15,-15)
+		melee_box.position = Vector2(-20,-15)
 	elif yDirection < 0:
 		facing = "up"
 		melee_box.position = Vector2(0,-45)
@@ -66,10 +68,10 @@ func _physics_process(_delta):
 		facing = "down"
 		melee_box.position = Vector2(0,5)
 	
-	
 	if Input.is_action_just_pressed("ui_select"):
 		shoot()
-
+		print("fireball")
+		
 	# call the animation function
 	update_animation()
 	
@@ -83,9 +85,13 @@ func _physics_process(_delta):
 		change_health(+5)
 		stopspam = false
 
+	
+
 func update_animation():
 	if is_attacking:
 		_animation_player.play("attack_" + facing)
+	#if is_shooting:
+		#_animation_player.play("range_attack_" + facing)
 	else:
 		if velocity.is_zero_approx():
 			_animation_player.play("idle_" + facing)
@@ -122,7 +128,7 @@ func shoot():
 	
 	# TODO: Add projectile to the game world
 	get_tree().get_root().add_child(projectile_clone)
-
+	
 	pass
 
 
@@ -135,8 +141,9 @@ func _on_melee_body_exited(body: Node2D) -> void:
 		current_enemy = null
 		
 func _process(_delta: float) -> void:
-	if current_enemy !=null and is_attacking:
+	if current_enemy != null and is_attacking:
 		current_enemy.change_health(-1)
+
 	pass
 
 

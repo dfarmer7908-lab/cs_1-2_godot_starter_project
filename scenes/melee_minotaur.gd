@@ -9,7 +9,7 @@ func _process(delta: float):
 	timer -= delta
 	
 func change_health(_amount:int):
-		if timer <0:
+		if timer < 0:
 			health += _amount
 			print("minotaur health: ", health)
 			timer = starttime
