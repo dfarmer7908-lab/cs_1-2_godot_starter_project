@@ -14,6 +14,7 @@ var current_enemy = null
 var lever1 = false
 var lever2 = false
 var lever3 = false
+var lever4 = false
 var stopspam = true
 
 
@@ -90,8 +91,6 @@ func _physics_process(_delta):
 func update_animation():
 	if is_attacking:
 		_animation_player.play("attack_" + facing)
-	#if is_shooting:
-		#_animation_player.play("range_attack_" + facing)
 	else:
 		if velocity.is_zero_approx():
 			_animation_player.play("idle_" + facing)

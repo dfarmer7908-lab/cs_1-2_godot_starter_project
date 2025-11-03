@@ -1,6 +1,6 @@
 extends Area2D
 var direction
-var speed=300
+var speed = 300
 
 
 func _ready() -> void:
