@@ -1,5 +1,5 @@
 extends CharacterBody2D
-var speed = 150
+var speed = 200
 var maxHealth = 5
 var health = maxHealth
 var start_time = .67
@@ -7,16 +7,18 @@ var timer = start_time
 var direction
 var start_shoot_timer = 1.5
 var shoot_timer = start_shoot_timer
-
+var xDirection = 0
+var yDirection = 0
+var maxmelee = 0.67
+var meleetimer = maxmelee
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
 
 var chasing = false
 var meleeing = false
 var in_range = false
 
-var projectile_original = preload("res://scenes/enemy_projectile.tscn")
-#replace the thing above with the thing below
-#var arrow_projectile = preload("res://scenes/arrow.tscn")
+var projectile_original = preload("res://scenes/enemy_arrow.tscn")
+
 
 @onready var player: CharacterBody2D = %Player
 var facing = "down"
@@ -25,32 +27,42 @@ func _ready():
 	pass
 
 func _process(_delta: float):
-	
+	if player.position < position:
+			facing = "left"
+	if player.position > position:
+			facing = "right"
 	timer -= _delta
-	
+	meleetimer -= _delta
 	if in_range:
 		shoot_timer -= _delta
 		if shoot_timer < 0:
-			shoot(player)
+			shoot()
 			shoot_timer = start_shoot_timer
 		animation_player.play("crossbow_shoot_" + facing)
-		
-		pass
-		
+
+
 	elif chasing and !meleeing:
 		animation_player.play("walk_" + facing)
-		#position += direction * speed * _delta
-		
+		direction = (player.global_position - global_position).normalized()
+		velocity = direction * speed
+		move_and_slide()
+		#chase
 		pass
 		
 	elif chasing and meleeing:
 		animation_player.play("attack_" + facing)
-		
+		if player.is_in_group("player"):
+			if meleetimer < 0:
+				player.change_health(-3)
+				meleetimer = maxmelee
+		#chase and melee
 		pass
 		
 	elif !in_range and !chasing and !meleeing:
 		animation_player.play("idle_" + facing)
 		
+		
+		#stop everything/look at player
 		pass
 	
 func change_health(_amount:int):
@@ -101,13 +113,9 @@ func _on_ranged_body_exited(body: Node2D) -> void:
 
 
 
-func shoot(player):
+func shoot():
 	var projectile_clone = projectile_original.instantiate()
 	projectile_clone.global_position = position
 	projectile_clone.set_direction(player.position)
 	get_tree().get_root().add_child(projectile_clone)
-	#var arrow_clone = arrow_projectile.instantiate()
-	#arrow_clone.global_position = position
-	#arrow_clone.set_direction(player.position)
-	#get_tree().get_root().add_child(arrow_clone)
 	pass

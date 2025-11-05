@@ -520,7 +520,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_down",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -540,7 +540,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_left",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -560,7 +560,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_right",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -580,7 +580,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_up",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1018,10 +1018,8 @@ script = ExtResource("1_vltjp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_xx5td")
-animation = &"crossbow_shoot_right"
+animation = &"attack_up"
 autoplay = "crossbow_shoot_right"
-frame = 7
-frame_progress = 0.985295
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)

@@ -3,6 +3,7 @@ var direction
 var speed = 300
 
 
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
@@ -18,3 +19,9 @@ func _physics_process(_delta):
 	
 func set_direction(target):
 	direction = position.direction_to(target)
+	if direction.x < 0:
+		scale.x *= -0.75
+		scale.y *= 0.75
+		
+	
+	
