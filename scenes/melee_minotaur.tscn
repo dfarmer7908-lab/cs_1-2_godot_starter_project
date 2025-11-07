@@ -520,7 +520,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_down",
-"speed": 12.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -540,7 +540,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_left",
-"speed": 12.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -560,7 +560,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_right",
-"speed": 12.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -580,7 +580,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_up",
-"speed": 12.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1004,7 +1004,7 @@ animations = [{
 radius = 14.142136
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vltjp"]
-radius = 38.0
+radius = 27.018513
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_adppo"]
 radius = 99.0202
@@ -1018,7 +1018,7 @@ script = ExtResource("1_vltjp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_xx5td")
-animation = &"attack_up"
+animation = &"crossbow_idle_down"
 autoplay = "crossbow_shoot_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1029,6 +1029,7 @@ shape = SubResource("CircleShape2D_xl86w")
 [node name="Melee" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_vltjp")
 
 [node name="Chase" type="Area2D" parent="."]

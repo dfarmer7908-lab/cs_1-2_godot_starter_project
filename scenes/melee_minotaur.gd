@@ -7,8 +7,6 @@ var timer = start_time
 var direction
 var start_shoot_timer = 1.5
 var shoot_timer = start_shoot_timer
-var xDirection = 0
-var yDirection = 0
 var maxmelee = 0.67
 var meleetimer = maxmelee
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -27,12 +25,11 @@ func _ready():
 	pass
 
 func _process(_delta: float):
-	if player.position < position:
-			facing = "left"
-	if player.position > position:
-			facing = "right"
+	
+
 	timer -= _delta
 	meleetimer -= _delta
+	
 	if in_range:
 		shoot_timer -= _delta
 		if shoot_timer < 0:
@@ -60,7 +57,17 @@ func _process(_delta: float):
 		
 	elif !in_range and !chasing and !meleeing:
 		animation_player.play("idle_" + facing)
+	if player.position.x < position.x - 10:
+		facing = "left"
 		
+	elif player.position.x > position.x + 10:
+		facing = "right"
+		
+	elif player.position.y > position.y:
+		facing = "down"
+		
+	elif player.position.y < position.y:
+		facing = "up"
 		
 		#stop everything/look at player
 		pass
