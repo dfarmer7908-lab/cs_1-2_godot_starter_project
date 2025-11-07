@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lah76qx23g3n"
-path="res://.godot/imported/turret_projectile.png-941e87f681842757e82c9e5d9f6fbcb5.ctex"
+uid="uid://dsnljdmimsonc"
+path="res://.godot/imported/chest.png-6e4163d86c453a494f5bbcbcdddde770.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/turret_projectile.png"
-dest_files=["res://.godot/imported/turret_projectile.png-941e87f681842757e82c9e5d9f6fbcb5.ctex"]
+source_file="res://sprites/Tiles/items/chest.png"
+dest_files=["res://.godot/imported/chest.png-6e4163d86c453a494f5bbcbcdddde770.ctex"]
 
 [params]
 

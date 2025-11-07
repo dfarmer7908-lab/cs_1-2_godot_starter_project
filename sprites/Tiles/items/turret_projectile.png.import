@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhxhn8cbpsqwy"
-path="res://.godot/imported/cart.png-4d23eeae704525acd4c6ac89536ca945.ctex"
+uid="uid://lah76qx23g3n"
+path="res://.godot/imported/turret_projectile.png-a19844cc75c19266f29f0dc3f80464f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/cart.png"
-dest_files=["res://.godot/imported/cart.png-4d23eeae704525acd4c6ac89536ca945.ctex"]
+source_file="res://sprites/Tiles/items/turret_projectile.png"
+dest_files=["res://.godot/imported/turret_projectile.png-a19844cc75c19266f29f0dc3f80464f7.ctex"]
 
 [params]
 

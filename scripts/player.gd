@@ -1,149 +1,140 @@
 extends CharacterBody2D
 @onready var _animation_player: AnimatedSprite2D = $AnimatedSprite2D
-var projectile_original = preload("res://scenes/projectile.tscn")
+const projectile_original = preload("res://scenes/projectile.tscn")
+
 
 var xSpeed = 300.0
 var xDirection = 0
 var facing = "down"
 var ySpeed = 300.0
 var yDirection = 0
-var coins = 0
-var is_attacking = false
-var attack_timer = .67
-var current_enemy = null
-var lever1 = false
-var lever2 = false
-var lever3 = false
-var lever4 = false
-var stopspam = true
-
-
-@export var offset : Vector2 = Vector2(0, -25)
-@onready var melee_box: CollisionShape2D = $Melee/Melee_Box
-
 
 # TODO: Add health system variables
+var health = 10
 var maxHealth = 10
-var health = maxHealth
 
-func _ready() -> void:
-	pass
+# TODO: Add projectile scene for shooting
+# var projectile_scene = preload("res://scenes/projectile.tscn")
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		is_attacking = true
-		print ("melee")
-	if is_attacking:
-		attack_timer -= _delta
-		if attack_timer < 0:
-			is_attacking = false
-			attack_timer = .67
+	# TODO: Get horizontal input (left/right keys)
 	# Input.get_axis checks two keys and gives us a number:
 	# - When LEFT is pressed: returns -1.0
-	
 	# - When RIGHT is pressed: returns 1.0  
 	# - When NOTHING is pressed: returns 0.0
 	xDirection = Input.get_axis("ui_left", "ui_right")
 	
+	
 	# TODO: Get vertical input (up/down keys)  
 	# Same idea, but for up and down movement
-	yDirection = Input.get_axis("ui_up", "ui_down")
+	yDirection = Input.get_axis("ui_up","ui_down")
+	
+	# TODO: Calculate X movement by multiplying direction × speed
+	# This gives us the actual pixels to move this frame
+	# If direction is 1 and speed is 300, we get 300 pixels right
+	# If direction is -1 and speed is 300, we get -300 pixels (left)
+	# Type this exactly: var velocity.y = xDirection * xSpeed
+	velocity.x = xDirection * xSpeed
+	
+	# TODO: Calculate Y movement the same way
+	 # Type this exactly: var velocity.y = yDirection * ySpeed  
+	velocity.y = yDirection * ySpeed
+	
 	
 	# TODO: Set the player's velocity (how fast they're moving)
 	# Godot's CharacterBody2D uses a velocity system
-	#velocity is a vector, define it as a product of speed and direction
-	velocity.x = xDirection * xSpeed
-	velocity.y = yDirection * ySpeed
+	# Type this exactly: velocity.x = xVector
+	
+	
+	# TODO: Set the Y velocity too
+	# Type this exactly: velocity.y = yVector
+	
 	
 	# TODO: Update facing direction based on movement
+	# Use if statements to check xDirection and yDirection
+	# Set facing to "right", "left", "down", or "up"
+	# Only update facing when actually moving (direction != 0)
 	if xDirection > 0:
 		facing = "right"
-		melee_box.position = Vector2(20,-15)
 	elif xDirection < 0:
 		facing = "left"
-		melee_box.position = Vector2(-20,-15)
 	elif yDirection < 0:
 		facing = "up"
-		melee_box.position = Vector2(0,-45)
 	elif yDirection > 0:
 		facing = "down"
-		melee_box.position = Vector2(0,5)
 	
+	#if space is pressed:
 	if Input.is_action_just_pressed("ui_select"):
-		shoot()
-		print("fireball")
-		
-	# call the animation function
+		shoot() 
+	
+	# TODO: Update animation based on facing direction
+	# Call your update_animation() function here
 	update_animation()
 	
+	# TODO: Check for shooting input
+	# Use: if Input.is_action_just_pressed("ui_accept"):
+	# Then call your shoot() function
+	
+	
+	# TODO: Actually apply the movement
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
+	
+	
+	# TODO: Print confirmation that we moved
+	# Type this exactly: print("Player moved!")
+
 
 # TODO: Create animation function (add this outside of _physics_process)
-
-	if lever1 and !lever2 and lever3 and stopspam:
-		print("Secret found! 5 health healed!") 
-		change_health(+5)
-		stopspam = false
-
-	
-
 func update_animation():
-	if is_attacking:
-		_animation_player.play("attack_" + facing)
+	# TODO: Set the animation based on the facing direction
+	if xDirection == 0 and yDirection == 0:
+		_animation_player.play("idle_" + facing)
 	else:
-		if velocity.is_zero_approx():
-			_animation_player.play("idle_" + facing)
-		elif !velocity.is_zero_approx():
-			_animation_player.play("walk_" + facing)
-		
+		_animation_player.play("walk_" + facing)
+	# Use: _animation_player.play("idle_" + facing)
+	# This combines "idle_" with whatever direction we're facing
+	pass
+var coins=0
+func change_coins(amount):
+	coins+=amount
 # TODO: Create health change function for interactions
-func change_health(_amount:int):
-	health += _amount
-	if health < 1:
-		die()
-	if health > maxHealth:
-		health = maxHealth
-	print("Health: ", health)
+func change_health(amount):
+	# TODO: Add amount to health (positive = heal, negative = damage)
+	# TODO: Make sure health stays between 0 and maxHealth
+	# TODO: Print the new health value
+	# TODO: Check if health <= 0 for death (optional challenge)
+	print("Health changed by: -1", amount)
 
-func change_coins(_amount:int):
-	coins += _amount
-	print("you have " +str(coins) +" coins")
 
-func die():
-	print("you died")
-	get_tree().reload_current_scene()
 	
-# TODO: Create shooting function
-func shoot():
+
 	# TODO: Create a new projectile instance
-	var projectile_clone = projectile_original.instantiate()
+	# Look at the documentation examples in the lesson
+	
 	
 	# TODO: Set projectile position to player position
-	projectile_clone.global_position = position + offset
+	# Look at the "Setting Object Position" example
+	
 	
 	# TODO: Set projectile direction using facing variable
-	projectile_clone.set_direction(facing)
+	# Look at the "Calling Functions on Other Objects" example
+	
 	
 	# TODO: Add projectile to the game world
-	get_tree().get_root().add_child(projectile_clone)
+	# Look at the "Adding Objects to the Game World" example
+	
+	
+	# TODO: Print shooting confirmation
+	# print("Shot projectile facing: ", facing)
 	
 	pass
-
-
-func _on_melee_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		current_enemy = body
-		
-func _on_melee_body_exited(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		current_enemy = null
-		
-func _process(_delta: float) -> void:
-	if current_enemy != null and is_attacking:
-		current_enemy.change_health(-1)
+	
+func shoot():
+	var new_projectile = projectile_original.instantiate()
+	get_parent().add_child(new_projectile)
+	new_projectile.set_direction(facing)
+	var projectile_original = preload("res://scenes/projectile.tscn")
+	new_projectile.global_position = position + Vector2(0,-25)
 
 	pass
-
-
- 

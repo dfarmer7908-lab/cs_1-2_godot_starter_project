@@ -3,6 +3,7 @@ extends Area2D
 # TODO: Add speed variable for how fast projectile moves
 # var speed = ?
 var speed = 300
+
 # TODO: Add direction variable to store which way to move
 # var direction = Vector2.ZERO
 var direction = Vector2.ZERO

@@ -1,25 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdxnilxxlekcf"]
+[gd_scene load_steps=9 format=3 uid="uid://df0w1vpfaaev8"]
 
-[ext_resource type="Script" uid="uid://deamll8fmvs0t" path="res://scripts/projectile.gd" id="1_q3m7n"]
-[ext_resource type="Texture2D" uid="uid://lah76qx23g3n" path="res://sprites/Tiles/items/turret_projectile.png" id="2_softn"]
+[ext_resource type="Script" uid="uid://f76c4h7b6k5k" path="res://scripts/turret_projectile.gd" id="1_thpf4"]
+[ext_resource type="Texture2D" uid="uid://lah76qx23g3n" path="res://sprites/Tiles/items/turret_projectile.png" id="2_v0v83"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok8aq"]
 radius = 19.15
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6q2a6"]
-atlas = ExtResource("2_softn")
+atlas = ExtResource("2_v0v83")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_byeak"]
-atlas = ExtResource("2_softn")
+atlas = ExtResource("2_v0v83")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jxwu6"]
-atlas = ExtResource("2_softn")
+atlas = ExtResource("2_v0v83")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7nm8"]
-atlas = ExtResource("2_softn")
+atlas = ExtResource("2_v0v83")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_saxa4"]
@@ -42,10 +42,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="projectile" type="Area2D"]
+[node name="turret_projectile" type="Area2D"]
 position = Vector2(4.76837e-07, -8)
 scale = Vector2(0.4, 0.4)
-script = ExtResource("1_q3m7n")
+script = ExtResource("1_thpf4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ok8aq")

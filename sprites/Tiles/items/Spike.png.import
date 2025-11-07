@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl5vm2j0n6sxa"
-path="res://.godot/imported/ALever.png-8c3203ea1e4679890e8ba0e4df8b95b9.ctex"
+uid="uid://c1qgyb1qwjh00"
+path="res://.godot/imported/Spike.png-ab73256082772eb171b052361532b643.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/ALever.png"
-dest_files=["res://.godot/imported/ALever.png-8c3203ea1e4679890e8ba0e4df8b95b9.ctex"]
+source_file="res://sprites/Tiles/items/Spike.png"
+dest_files=["res://.godot/imported/Spike.png-ab73256082772eb171b052361532b643.ctex"]
 
 [params]
 

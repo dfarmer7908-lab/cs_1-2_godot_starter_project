@@ -1,8 +1,8 @@
-[gd_scene load_steps=133 format=3 uid="uid://ddq1bkyn8j1by"]
+[gd_scene load_steps=130 format=3 uid="uid://ddq1bkyn8j1by"]
 
 [ext_resource type="Texture2D" uid="uid://busa5myjbwb4i" path="res://sprites/Download38899.png" id="1_nohjn"]
-[ext_resource type="Script" uid="uid://di404qslpnp8m" path="res://scenes/melee_minotaur.gd" id="1_vltjp"]
 [ext_resource type="Texture2D" uid="uid://dqoamfql4kdnq" path="res://sprites/Download19204.png" id="2_7o3s3"]
+[ext_resource type="PackedScene" uid="uid://ccymai156a6dr" path="res://scenes/health.tscn" id="3_y37pd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgyv5"]
 atlas = ExtResource("1_nohjn")
@@ -520,7 +520,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_down",
-"speed": 7.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -540,7 +540,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_left",
-"speed": 7.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -560,7 +560,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_right",
-"speed": 7.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -580,7 +580,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_up",
-"speed": 7.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1001,50 +1001,21 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xl86w"]
-radius = 14.142136
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vltjp"]
-radius = 27.018513
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_adppo"]
-radius = 99.0202
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_uk8e4"]
-radius = 153.00327
-
-[node name="MeleeMinotaur" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_vltjp")
+[node name="MeleeMinotaur" type="CharacterBody2D"]
+position = Vector2(0, -30)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_xx5td")
-animation = &"crossbow_idle_down"
+animation = &"crossbow_shoot_right"
 autoplay = "crossbow_shoot_right"
+frame = 7
+frame_progress = 0.985295
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(0, 9.5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_xl86w")
+disabled = true
 
-[node name="Melee" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
-position = Vector2(0, 6)
-shape = SubResource("CircleShape2D_vltjp")
-
-[node name="Chase" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chase"]
-shape = SubResource("CircleShape2D_adppo")
-
-[node name="Ranged" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
-shape = SubResource("CircleShape2D_uk8e4")
-
-[connection signal="body_entered" from="Melee" to="." method="_on_melee_body_entered"]
-[connection signal="body_exited" from="Melee" to="." method="_on_melee_body_exited"]
-[connection signal="body_entered" from="Chase" to="." method="_on_chase_body_entered"]
-[connection signal="body_exited" from="Chase" to="." method="_on_chase_body_exited"]
-[connection signal="body_entered" from="Ranged" to="." method="_on_ranged_body_entered"]
-[connection signal="body_exited" from="Ranged" to="." method="_on_ranged_body_exited"]
+[node name="Health" parent="." instance=ExtResource("3_y37pd")]

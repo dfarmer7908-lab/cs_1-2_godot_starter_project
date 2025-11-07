@@ -1,19 +1,16 @@
-extends Area2D
+extends Node
 
-func _ready() -> void:
-	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
-	
+	if body.name == "CharacterBody2D":
 	# TODO: Check if the object that touched the coin is the player
-	if body.name == "Player":
 		body.change_coins(1)
 		queue_free()
+		
 	
-	
-	# TODO: Print a message when the coin is collected
-	
-	
+		var coins = 0
+		coins = coins+1
+		coins+=1
 	
 	# TODO: Remove the coin from the game
 	
