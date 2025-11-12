@@ -22,6 +22,8 @@ func set_direction(target):
 	if direction.x < 0:
 		scale.x *= -0.75
 		scale.y *= 0.75
-		
+	if direction.x > 0:
+		scale.x *= 0.75
+		scale.y *= 0.75
 	
 	
