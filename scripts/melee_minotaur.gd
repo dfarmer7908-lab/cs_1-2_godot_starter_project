@@ -25,7 +25,17 @@ func _ready():
 	pass
 
 func _process(_delta: float):
-	
+	if player.position.x < position.x - 10:
+		facing = "left"
+		
+	elif player.position.x > position.x + 10:
+		facing = "right"
+		
+	elif player.position.y > position.y:
+		facing = "down"
+		
+	elif player.position.y < position.y:
+		facing = "up"
 
 	timer -= _delta
 	meleetimer -= _delta
@@ -50,24 +60,14 @@ func _process(_delta: float):
 		animation_player.play("attack_" + facing)
 		if player.is_in_group("player"):
 			if meleetimer < 0:
-				player.change_health(-3)
+				player.change_health(-1)
 				meleetimer = maxmelee
 		#chase and melee
 		pass
 		
 	elif !in_range and !chasing and !meleeing:
 		animation_player.play("idle_" + facing)
-	if player.position.x < position.x - 10:
-		facing = "left"
-		
-	elif player.position.x > position.x + 10:
-		facing = "right"
-		
-	elif player.position.y > position.y:
-		facing = "down"
-		
-	elif player.position.y < position.y:
-		facing = "up"
+	
 		
 		#stop everything/look at player
 		pass
